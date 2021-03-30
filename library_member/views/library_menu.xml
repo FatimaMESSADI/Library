@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<odoo>
+	
+<record model="ir.actions.act_window" id="member_action_window">
+      <field name="name">Library Members</field>
+      <field name="res_model">library.member</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+
+        <menuitem name="Members" id="library_member_list" parent="bibliotheque.menu_root"
+              action="member_action_window"/>
+</odoo>

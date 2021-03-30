@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<odoo>
+	<record id="book_form_view_extend" model="ir.ui.view">
+		<field name="name">Book: add Is Available? field</field>
+    	<field name="model">bibliotheque.book</field>
+    	<field name="inherit_id" ref="bibliotheque.book_form_view"/>
+    	<field name="arch" type="xml">
+
+    		<field name="isbn" position="after">
+    			<field name="is_available" />
+    		</field>
+
+    	</field>
+    </record>
+</odoo>
