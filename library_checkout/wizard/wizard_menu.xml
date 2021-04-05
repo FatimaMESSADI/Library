@@ -1,0 +1,14 @@
+<!--<?xml version="1.0"?>
+<odoo>
+<record model="ir.actions.act_window" id="message_action_window">
+		<field name="name">Send Messages</field>
+		<field name="src_model">library.checkout</field>
+		<field name="res_model">library.checkout.massmessage</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+		<field name="multi">true</field>
+</record>
+
+	<menuitem name="Checkout_Message" id="checkout_message_list" parent="bibliotheque.menu_root"
+              action="message_action_window"/>
+</odoo>-->

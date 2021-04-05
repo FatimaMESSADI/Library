@@ -41,18 +41,18 @@
     -->
 
     <!-- Top menu item -->
-    <!--
-    <menuitem name="library_checkout" id="library_checkout.menu_root"/>
-    -->
+    
+    <!--<menuitem name="Library_checkout" id="library_checkout.menu_root"/>-->
+    
     <!-- menu categories -->
     <!--
     <menuitem name="Menu 1" id="library_checkout.menu_1" parent="library_checkout.menu_root"/>
     <menuitem name="Menu 2" id="library_checkout.menu_2" parent="library_checkout.menu_root"/>
     -->
     <!-- actions -->
-    <!--
-    <menuitem name="List" id="library_checkout.menu_1_list" parent="library_checkout.menu_1"
-              action="library_checkout.action_window"/>
+    
+    <!--<menuitem name="List" id="library_checkout_list" parent="library_checkout.menu_root"
+              action="library_checkout_action_window"/>
     <menuitem name="Server to list" id="library_checkout" parent="library_checkout.menu_2"
               action="library_checkout.action_server"/>
     -->

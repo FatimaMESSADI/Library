@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_library_checkout_library_checkout,library_checkout.library_checkout,model_library_checkout_library_checkout,,1,0,0,0
+access_library_checkout,access_library_checkout,model_library_checkout,base.group_user,1,1,1,0
+access_library_checkout_line,access_library_checkout_line,model_library_checkout_line,base.group_user,1,1,1,0
+access_library_checkout_stage,access_library_checkout_stage,model_library_checkout_stage,base.group_user,1,1,1,0
