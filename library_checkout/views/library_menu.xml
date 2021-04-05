@@ -1,0 +1,23 @@
+<odoo>
+
+	<record model="ir.actions.act_window" id="checkout_action_window">
+      <field name="name">Library Checkouts</field>
+      <field name="res_model">library.checkout</field>
+      <field name="view_mode">tree,form,activity,graph,pivot</field>
+    </record>
+
+
+	<menuitem name="Checkouts" id="library_checkout_list" parent="bibliotheque.menu_root"
+              action="checkout_action_window"/>
+
+
+    <record model="ir.actions.act_window" id="checkout_stage_action_window">
+      <field name="name">Library Checkouts stages</field>
+      <field name="res_model">library.checkout.stage</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+	<menuitem name="Checkouts stages" id="library_checkout_stage" parent="bibliotheque.menu_root"
+              action="checkout_stage_action_window"/>
+</odoo>

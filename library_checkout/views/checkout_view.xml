@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<odoo>
+	<act_window id="action_other_checkouts_button"
+		name="Open Other Checkouts"
+		res_model="library.checkout"
+		view_mode="tree,form"
+		domain="[('member_id', '=', default_member_id),
+				 ('state', 'in', ['open']),
+				 ('id', '!=', active_id)]" />
+
+	<record model="ir.ui.view" id="checkout_form_view">
+		<field name="name">Checkout Form</field>
+		<field name="model">library.checkout</field>
+		<field name="arch" type="xml">
+			<form>
+				<header>
+					<field name="state" invisible="True" />
+					<button name="button_done"
+						type="object"
+						string="Return Books"
+						states="open,cancel"
+						attrs="{'invisible':[('state', 'in', ['new', 'done'])]}"
+						class="oe_highlight" />
+					<field name="stage_id"
+						widget="statusbar"
+						clickable="True"
+						options="{'fold_field': 'fold'}" />
+					<field name="state" invisible="True" />
+				</header> 
+				<sheet>
+					<div name="button_box" class="oe_button_box">
+						<button class="oe_stat_button"
+							icon="fa-tasks"
+							help="Other checkouts pending return."
+							type="action"
+							name="%(action_other_checkouts_button)d"
+							context="{'default_member_id': member_id}" >
+
+							<field string="To Return"
+								name="num_other_checkouts"
+								widget="statinfo" />
+						</button>
+					</div>
+					<field name="member_image" widget="image" class="oe_avatar" />
+					<div class="oe_title">
+						<label for="name" class="oe_edit_only"/>
+						<h1><field name="name"/></h1>
+						<h3>
+							<span class="oe_read_only">By</span>
+							<label for="user_id" class="oe_edit_only"/>
+							<field name="user_id" class="oe_inline" />
+						</h3>
+					</div>
+					<group name="group_top">
+						<group name="group_col1"
+							col="4"
+							colspan="2"
+							string="Group 1">
+							<field name="user_id" />
+							<field name="checkout_date" />
+						</group>
+						<group name="group_col2" string="Group 2">
+							<field name="state" />
+							<field name="close_date"
+								attrs="{'invisible':[('state', 'in', ['new', 'open'])]}" />
+						</group>
+					</group>
+					<group>
+						<field name="member_id" />
+						<field name="user_id" />
+						<field name="request_date"/>
+						<field name="line_ids">
+							<tree>
+								<field name="checkout_id"/>
+								<field name="book_id"/>
+							</tree>
+						</field>
+					</group>
+					<notebook>
+						<page string="Borrowed Books" name="page_lines" >
+							<field name="line_ids">
+								<tree>
+									<field name="book_id" />
+								</tree>
+								<form>
+									<field name="book_id" />
+								</form>
+							</field>
+						</page>
+						<page string="Librarian" name="page_lines">
+							<field name="user_id"/>
+						</page>
+						<page string="Member" name="page_lines">
+							<field name="member_id"/>
+						</page>
+					</notebook>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers" />
+					<field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="checkout_tree_view">
+		<field name="name">Checkout Tree</field>
+		<field name="model">library.checkout</field>
+		<field name="arch" type="xml">
+			<tree decoration-muted="state in ['done', 'cancel']" decoration-bf="state=='open'">
+				<field name="state" invisible="True" />
+				<field name="member_id" />
+				<field name="user_id" />
+				<field name="request_date"/>
+				<field name="line_ids"/>
+				<field name="num_books" sum="# Books"/>
+			</tree>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="checkout_search_view">
+		<field name="name">Checkout Filters</field>
+	    <field name="model">library.checkout</field>
+	    <field name="arch" type="xml">
+	    	<search>
+	    		<field name="member_id"/>
+				<field name="user_id"/>
+				<filter name="filter_not_done" string="To Return" domain="[('state','=','open')]"/>
+				<filter name="filter_my_checkouts" string="My Checkouts" domain="[('user_id','=',uid)]"/>
+				<filter name="group_user" string="By Member" context="{'group_by': 'member_id'}"/>
+			</search>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="checkout_pivot_view">
+		<field name="model">library.checkout</field>
+		<field name="arch" type="xml">
+			<pivot>
+				<field name="stage_id" type="col" />
+				<field name="member_id" />
+				<field name="request_date" interval="week" />
+				<field name="num_books" type="measure" />
+			</pivot>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="checkout_graph_view" >
+		<field name="model">library.checkout</field>
+		<field name="arch" type="xml">
+			<graph type="bar">
+				<field name="stage_id" />
+				<field name="num_books" type="measure" />
+			</graph>
+		</field>
+	</record>
+	<activity string="Activities"/>
+
+
+
+
+
+	
+
+
+	
+
+	<menuitem name="Library Checkout" id="library_checkout.menu_root"/>
+
+
+	
+</odoo>
+
